@@ -1,2 +1,2 @@
-0,"Example Car 1","Honda","SUV",2025,30000
-1,"Example Car 2","Toyota","SUV",2022,33000
+0,Example Car 1,Honda,SUV,2025,30000
+1,Example Car 2,Toyota,SUV,2022,33000
