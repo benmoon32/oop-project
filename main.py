@@ -27,25 +27,7 @@ def load_data(file):
         print(e)
     return cars
 
-# Command class
-class Command:
-    def __init__(self, name, description, func = None):
-        self.name = name
-        self.description = description
-        self.func = func
-
-    def run(self):
-        self.func()
-
-    def __str__(self):
-        return f"{self.name} - {self.description}"
-
-#Command functions
-def listcommands():
-    for command in commands:
-        print(command)
-
-def listcars():
+def printcars():
     for car in cars:
         print(car)
 
@@ -64,43 +46,30 @@ def search():
 def savedata():
     print("Not implemented yet")
 
-def exitcmd():
-    global should_exit
-    if saved_cars != cars:
-        print("Warning: you have unsaved changes!")
-        print("Would you still like to exit? [Y/N]")
-        exit_input = input()
-        if exit_input.lower().strip() == "y":
-            should_exit = True
-    else:
-        should_exit = True
-
-# Possible commands
-commands = [
-        Command("help", "Print a list of avaliable commands", listcommands),
-        Command("list", "Print a list of all cars", listcars),
-        Command("add", "Add a new car", addcar),
-        Command("edit", "Edit an existing car", editcar),
-        Command("remove", "Remove a car", removecar),
-        Command("search", "Search for a car", search),
-        Command("save", "Saves modified data", savedata),
-        Command("exit", "Exit the program", exitcmd)
-]
-
-def parse_command(cmd):
-    for command in commands:
-        if command.name == cmd:
-            command.run()
-            return
-    print(f"Error: '{cmd}' is not a valid command!")
-
 # Load the cars from data.txt
 saved_cars = load_data("data.txt")
 cars = saved_cars
 
-print("Car Inventory Manager v0.1")
-should_exit = False
+print("Welcome to the cars inventory system\nWhat would you like to do today?")
+print("1 - Add a car\n2 - Search for a car\n3 - Edit a car\n4 - Remove a car\n5 - Print all cars\n6 - Save data\n0 - Exit")
 command = ""
-while should_exit == False:
+while command != "0":
     command = input("> ")
-    parse_command(command)
+    if command == "1":
+        addcar()
+    elif command == "2":
+        search()
+    elif command == "3":
+        editcar()
+    elif command == "4":
+        removecar()
+    elif command == "5":
+        printcars()
+    elif command == "6":
+        savedata()
+    elif command == "0":
+        pass
+    else:
+        print("Invalid command")
+
+
