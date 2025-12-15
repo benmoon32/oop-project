@@ -54,10 +54,16 @@ def addcar():
     car_body = input("Body: ")
     car_year = input("Year: ")
     car_value = input("Value: ")
-    new_car = Car(car_id, car_name, car_make, car_body, car_year, car_value)
-    cars.append(new_car)
-    print("Car is added to the inventory.")
-    print(new_car)
+    error = False
+    for car in cars:
+        if car.id == car_id:
+            print("Incorrect ID - ID already exists in the system")
+            error = True
+    if error == False:
+        new_car = Car(car_id, car_name, car_make, car_body, car_year, car_value)
+        cars.append(new_car)
+        print("Car is added to the inventory.")
+        print(new_car)
     print("Do you want to add more cars? y(yes)/n(no)")
     add_more = input("> ")
     if add_more == "y":
@@ -78,7 +84,33 @@ def removecar():
 
 
 def search():
-    print("Not implemented yet")
+    search_type = ""
+    while search_type != "-1":
+        print("To search using the ID enter 1. To search using the name of the car enter 2. Enter -1 to return to the previous menu")
+        search_type = input("> ")
+        if search_type == "1":
+            print("Please enter the ID of the car:")
+            car_id = input("ID: ")
+            car_found = False
+            for car in cars:
+                if car.id == car_id:
+                    print(f"Car found: {car}")
+                    car_found = True
+            if not car_found:
+                print("Car not found")
+        elif search_type == "2":
+            print("Please enter the name of the car:")
+            car_name = input("Name: ")
+            car_found = False
+            for car in cars:
+                if car.name.lower().strip() == car_name.lower().strip():
+                    print(f"Car found: {car}")
+                    car_found = True
+            if not car_found:
+                print("Car not found")
+        elif search_type != "-1":
+            print("Invalid command")
+
 
 # Load the cars from data.txt
 saved_cars = load_data("data.txt")
