@@ -1,0 +1,36 @@
+Welcome to the cars inventory system
+What would you like to do today?
+Add a car? Enter 1
+Search for car? Enter 2
+Edit car info? Enter 3
+Remove a car? Enter 4
+Print the car list? Enter 5
+Save the data to a file? Enter 6
+Exit? Enter 0
+> Enter ID of the car, followed by the car's information
+ID: Name: Make: Body: Year: Value: Car is added to the inventory.
+1: Kia_rondo 2024, Kia, SUV, 2024, $10000
+Do you want to add more cars? y(yes)/n(no)
+> Enter ID of the car, followed by the car's information
+ID: Name: Make: Body: Year: Value: Incorrect ID - ID already exists in the system
+Do you want to add more cars? y(yes)/n(no)
+> Enter ID of the car, followed by the car's information
+ID: Name: Make: Body: Year: Value: Car is added to the inventory.
+2: Honda civic 2010, Honda, Sedan, 2010, $7000
+Do you want to add more cars? y(yes)/n(no)
+> Enter ID of the car, followed by the car's information
+ID: Name: Make: Body: Year: Value: Car is added to the inventory.
+3: Honda civic 2010, Honda, Sedan, 2010, $7000
+Do you want to add more cars? y(yes)/n(no)
+> Enter ID of the car, followed by the car's information
+ID: Name: Make: Body: Year: Value: Incorrect ID - ID already exists in the system
+Do you want to add more cars? y(yes)/n(no)
+> What would you like to do today?
+Add a car? Enter 1
+Search for car? Enter 2
+Edit car info? Enter 3
+Remove a car? Enter 4
+Print the car list? Enter 5
+Save the data to a file? Enter 6
+Exit? Enter 0
+> 
