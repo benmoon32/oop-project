@@ -32,7 +32,21 @@ def printcars():
         print(car)
 
 def addcar():
-    print("Not implemented yet")
+    print("Enter ID of the car, followed by the car's information")
+    car_id = input("ID: ")
+    car_name = input("Name: ")
+    car_make = input("Make: ")
+    car_body = input("Body: ")
+    car_year = input("Year: ")
+    car_value = input("Value: ")
+    new_car = Car(car_id, car_name, car_make, car_body, car_year, car_value)
+    cars.append(new_car)
+    print("Car is added to the inventory.")
+    print(new_car)
+    print("Do you want to add more cars? y(yes)/n(no)")
+    add_more = input("> ")
+    if add_more == "y":
+        addcar()
 
 def editcar():
     print("Not implemented yet")
@@ -50,10 +64,11 @@ def savedata():
 saved_cars = load_data("data.txt")
 cars = saved_cars
 
-print("Welcome to the cars inventory system\nWhat would you like to do today?")
-print("1 - Add a car\n2 - Search for a car\n3 - Edit a car\n4 - Remove a car\n5 - Print all cars\n6 - Save data\n0 - Exit")
+print("Welcome to the cars inventory system") 
 command = ""
 while command != "0":
+    print("What would you like to do today?")
+    print("Add a car? Enter 1\nSearch for car? Enter 2\nEdit car info? Enter 3\nRemove a car? Enter 4\nPrint the car list? Enter 5\nSave the data to a file? Enter 6\nExit? Enter 0")
     command = input("> ")
     if command == "1":
         addcar()
