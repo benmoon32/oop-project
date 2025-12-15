@@ -12,7 +12,10 @@ class Car:
         return f"Car(id={self.id}, name={self.name}, make={self.make}, body={self.body}, year={self.year}, value={self.value})"
 
     def __str__(self):
-        return f"{self.id}. {self.name}, {self.make}, {self.body}, {self.year}, ${self.value}"
+        return f"{self.id}: {self.name}, {self.make}, {self.body}, {self.year}, ${self.value}"
+
+    def saveString(self):
+        return f"{self.id},{self.name},{self.make},{self.body},{self.year},{self.value}"
 
 # Function to load data from file
 def load_data(file):
@@ -23,6 +26,18 @@ def load_data(file):
             for line in lines:
                 data = line.strip().split(",")
                 cars.append(Car(data[0], data[1], data[2], data[3], data[4], data[5]))
+    except Exception as e:
+        print(e)
+    return cars
+
+# Function to save data to file
+def save_data(file):
+    file_contents = ""
+    for car in cars:
+        file_contents += f"{car.saveString()}\n"
+    try:
+        with open(file, 'w') as file:
+            file.write(file_contents)
     except Exception as e:
         print(e)
     return cars
@@ -52,12 +67,17 @@ def editcar():
     print("Not implemented yet")
 
 def removecar():
-    print("Not implemented yet")
+    print("Enter ID of the car that you want to remove from the inventory")
+    car_id = input("ID: ")
+    for car in cars:
+        if car.id == car_id:
+            cars.remove(car)
+            print("Car removed")
+            return
+    print("Invalid car ID")
+
 
 def search():
-    print("Not implemented yet")
-
-def savedata():
     print("Not implemented yet")
 
 # Load the cars from data.txt
@@ -81,7 +101,7 @@ while command != "0":
     elif command == "5":
         printcars()
     elif command == "6":
-        savedata()
+        save_data("data.txt")
     elif command == "0":
         pass
     else:
