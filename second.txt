@@ -1,0 +1,21 @@
+Welcome to the cars inventory system
+What would you like to do today?
+Add a car? enter 1
+Search for car? enter 2
+Edit car info? enter 3
+Remove a car? enter 4
+Print the car list? enter 5
+Save the data to a file? enter 6
+Exit? enter 0.
+5
+1    Kia_rondo 2024    Kia    SUV    2024    10000.0
+2    Honda_civic 2010    Honda    Sedan    2010    7000.0
+What would you like to do today?
+Add a car? enter 1
+Search for car? enter 2
+Edit car info? enter 3
+Remove a car? enter 4
+Print the car list? enter 5
+Save the data to a file? enter 6
+Exit? enter 0.
+0

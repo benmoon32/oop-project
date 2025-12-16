@@ -4,8 +4,8 @@ class Car:
         self.name = name
         self.make = make
         self.body = body
-        self.year = year
-        self.value = value
+        self.year = int(year)
+        self.value = float(value)
 
     def __repr__(self):
         return f"Car(id={self.id}, name={self.name}, make={self.make}, body={self.body}, year={self.year}, value={self.value})"
@@ -19,11 +19,13 @@ class Car:
 def load_data(file):
     cars = []
     try:
-        with open(file, 'w+') as file:
+        with open(file, 'r') as file:
             lines = file.readlines()
             for line in lines:
                 data = line.strip().split(",")
                 cars.append(Car(data[0], data[1], data[2], data[3], data[4], data[5]))
+    except FileNotFoundError:
+        pass
     except Exception as e:
         print(e)
     return cars
@@ -35,6 +37,7 @@ def save_data(file):
     try:
         with open(file, 'w') as file:
             file.write(file_contents)
+        print("Data saved to local file successfully!")
     except Exception as e:
         print(e)
     return cars
@@ -53,7 +56,7 @@ def addcar():
     car_value = input("value: \n")
     error = False
     for car in cars:
-        if car.name == car_name and car.make == car_make and car.body == car_body and car.year == car_year and car.value == car_value:
+        if car.name == car_name:
             print("The car is already in the inventory. No action is required..")
             error = True
         elif car.id == car_id:
@@ -65,7 +68,7 @@ def addcar():
         print("car is added to the inventory.")
         print(new_car)
     print("Do you want to add more cars? y(yes)/n(no)")
-    add_more = input("> ")
+    add_more = input("")
     if add_more == "y":
         addcar()
 
@@ -81,8 +84,8 @@ def editcar():
                 car_name = input("Name: ")
                 car_make = input("Make: ")
                 car_body = input("Body: ")
-                car_year = input("Year: ")
-                car_value = input("Value: ")
+                car_year = int(input("Year: "))
+                car_value = float(input("Value: "))
 
                 car.name, car.make, car.body, car.year, car.value = car_name, car_make, car_body, car_year, car_value
 
@@ -93,14 +96,15 @@ def editcar():
 
     
 def removecar():
-    print("Enter ID of the car that you want to remove from the inventory")
-    car_id = input("ID: ")
+    print("Enter id of the car that you want to remove from the inventory")
+    car_id = input("")
     for car in cars:
         if car.id == car_id:
             cars.remove(car)
-            print("Car removed")
+            print("car removed")
             return
-    print("Invalid car ID")
+    print("Car not found")
+    remove_more = input("Do you want to remove more cars? y(yes)/n(no)")
 
 
 def search():
@@ -123,7 +127,7 @@ def search():
             car_name = input("Name: ")
             car_found = False
             for car in cars:
-                if car.name.lower().strip() == car_name.lower().strip():
+                if car.name == car_name:
                     print(f"Car found {car}")
                     car_found = True
             if not car_found:
