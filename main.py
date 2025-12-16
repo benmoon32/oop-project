@@ -76,16 +76,16 @@ def editcar():
     car_id = ""
     while car_id != "-1":
         print("Enter the id of the car. Enter -1 to return to the previous menu")
-        car_id = input("ID: ")
+        car_id = input("")
         car_found = False
         for car in cars:
             if car.id == car_id:
                 car_found = True
-                car_name = input("Name: ")
-                car_make = input("Make: ")
-                car_body = input("Body: ")
-                car_year = int(input("Year: "))
-                car_value = float(input("Value: "))
+                car_name = input("Name:\n")
+                car_make = input("make:\n")
+                car_body = input("Body:\n")
+                car_year = int(input("year:\n"))
+                car_value = float(input("value:\n"))
 
                 car.name, car.make, car.body, car.year, car.value = car_name, car_make, car_body, car_year, car_value
 
@@ -114,7 +114,7 @@ def search():
         search_type = input("")
         if search_type == "1":
             print("Please Enter the id of the car:")
-            car_id = input("ID: ")
+            car_id = input("")
             car_found = False
             for car in cars:
                 if car.id == car_id:
@@ -124,7 +124,7 @@ def search():
                 print("Car not found")
         elif search_type == "2":
             print("Please enter the name of the car:")
-            car_name = input("Name: ")
+            car_name = input("")
             car_found = False
             for car in cars:
                 if car.name == car_name:

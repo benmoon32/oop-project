@@ -102,17 +102,17 @@ Exit? enter 0.
 To search using the Id enter 1. To search using the name of the car enter 2. Enter -1 to return to the previous menu
 1
 Please Enter the id of the car:
-ID: 1
+1
 Car found 1    Kia_rondo 2024    Kia    SUV    2024    10000.0
 To search using the Id enter 1. To search using the name of the car enter 2. Enter -1 to return to the previous menu
 2
 Please enter the name of the car:
-Name: Honda civic 2010
+Honda civic 2010
 Car found 2    Honda civic 2010    Honda    Sedan    2010    7000.0
 To search using the Id enter 1. To search using the name of the car enter 2. Enter -1 to return to the previous menu
 2
 Please enter the name of the car:
-Name: byd
+byd
 Car not found
 To search using the Id enter 1. To search using the name of the car enter 2. Enter -1 to return to the previous menu
 -1
@@ -126,15 +126,20 @@ Save the data to a file? enter 6
 Exit? enter 0.
 3
 Enter the id of the car. Enter -1 to return to the previous menu
-ID: 3
-Name: BMW_x2
-Make: BMW
-Body: Sedan
-Year: 2020
-Value: 30000
+3
+Name:
+BMW_x2
+make:
+BMW
+Body:
+Sedan
+year:
+2020
+value:
+30000
 Car's new info is 3    BMW_x2    BMW    Sedan    2020    30000.0
 Enter the id of the car. Enter -1 to return to the previous menu
-ID: -1
+-1
 Car not found
 What would you like to do today?
 Add a car? enter 1
