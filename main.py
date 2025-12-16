@@ -1,3 +1,11 @@
+# Car Inventory Manager
+# December 15th, 2025
+# Allows you to add, remove, edit, search for, print a list of, and save cars.
+# Cars have an id (string), name (string), make (string), body (string), year (int), and value (float).
+# Cars are saved to and loaded from a text file (data.txt), and stored in a list.
+# Input is validated to ensure it is the correct type, and error messages will display if the user's input is incorrect.
+
+# Car class
 class Car:
     def __init__(self, id, name, make, body, year, value):
         self.id = id
@@ -10,16 +18,33 @@ class Car:
     def __repr__(self):
         return f"Car(id={self.id}, name={self.name}, make={self.make}, body={self.body}, year={self.year}, value={self.value})"
 
+    # String representation of car
     def __str__(self):
         return f"{self.id}    {self.name}    {self.make}    {self.body}    {self.year}    {self.value:.1f}"
 
+    # String that is saved to the text file
     def saveString(self):
         return f"{self.id},{self.name},{self.make},{self.body},{self.year},{self.value}"
 
-def load_data(file):
+# Helper function to ask for an input with validation
+def input_with_validation(prompt, typecast, allow_empty, error_message = "Invalid input"):
+    while True:
+        value = input(prompt)
+        if len(value) > 0 or allow_empty:
+            try:
+                if typecast is not None:
+                    value = typecast(value)
+                return value
+            except ValueError:
+                print(error_message)
+        else:
+            print(error_message)
+
+# Function to load data from a text file
+def load_data(filename):
     cars = []
     try:
-        with open(file, 'r') as file:
+        with open(filename, 'r') as file:
             lines = file.readlines()
             for line in lines:
                 data = line.strip().split(",")
@@ -30,30 +55,32 @@ def load_data(file):
         print(e)
     return cars
 
-def save_data(file):
+# Function to save data to a text file
+def save_data(filename):
     file_contents = ""
     for car in cars:
         file_contents += f"{car.saveString()}\n"
     try:
-        with open(file, 'w') as file:
+        with open(filename, 'w') as file:
             file.write(file_contents)
         print("Data saved to local file successfully!")
     except Exception as e:
         print(e)
-    return cars
 
+# Print car list command
 def printcars():
     for car in cars:
         print(car)
 
+# Add car command
 def addcar():
     print("Enter id of the car, followed by the car's information.")
-    car_id = input("Id: \n")
-    car_name = input("name: \n")
-    car_make = input("make: \n")
-    car_body = input("Body: \n")
-    car_year = input("year: \n")
-    car_value = input("value: \n")
+    car_id = input_with_validation("Id: \n", str, False, "Invalid input - id cannot be empty")
+    car_name = input_with_validation("name: \n", str, False, "Invalid input - name cannot be empty")
+    car_make = input_with_validation("make: \n", str, False, "Invalid input - make cannot be empty")
+    car_body = input_with_validation("Body: \n", str, False, "Invalid input - body cannot be empty")
+    car_year = input_with_validation("year: \n", int, False, "Invalid input - Please enter an integer")
+    car_value = input_with_validation("value: \n", float, False, "Invalid input - Please enter a number")
     error = False
     for car in cars:
         if car.name == car_name:
@@ -63,6 +90,7 @@ def addcar():
             print("Incorrect Id. Id already exist in the system.")
             error = True
     if error == False:
+        # Create the new car and add it to the list
         new_car = Car(car_id, car_name, car_make, car_body, car_year, car_value)
         cars.append(new_car)
         print("car is added to the inventory.")
@@ -72,6 +100,7 @@ def addcar():
     if add_more == "y":
         addcar()
 
+# Edit car command
 def editcar():
     car_id = ""
     while car_id != "-1":
@@ -81,20 +110,20 @@ def editcar():
         for car in cars:
             if car.id == car_id:
                 car_found = True
-                car_name = input("Name:\n")
-                car_make = input("make:\n")
-                car_body = input("Body:\n")
-                car_year = int(input("year:\n"))
-                car_value = float(input("value:\n"))
-
+                car_name = input_with_validation("name: \n", str, False, "Invalid input - name cannot be empty")
+                car_make = input_with_validation("make: \n", str, False, "Invalid input - make cannot be empty")
+                car_body = input_with_validation("Body: \n", str, False, "Invalid input - body cannot be empty")
+                car_year = input_with_validation("year: \n", int, False, "Invalid input - Please enter an integer")
+                car_value = input_with_validation("value: \n", float, False, "Invalid input - Please enter a number")
+                
+                # Update car with new values
                 car.name, car.make, car.body, car.year, car.value = car_name, car_make, car_body, car_year, car_value
 
                 print(f"Car's new info is {car}")
         if not car_found:
             print("Car not found")
-            
 
-    
+# Remove car command
 def removecar():
     print("Enter id of the car that you want to remove from the inventory")
     car_id = input("")
@@ -106,12 +135,13 @@ def removecar():
     print("Car not found")
     remove_more = input("Do you want to remove more cars? y(yes)/n(no)")
 
-
+# Search command
 def search():
     search_type = ""
     while search_type != "-1":
         print("To search using the Id enter 1. To search using the name of the car enter 2. Enter -1 to return to the previous menu")
         search_type = input("")
+        # Search type 1 - ID
         if search_type == "1":
             print("Please Enter the id of the car:")
             car_id = input("")
@@ -122,6 +152,7 @@ def search():
                     car_found = True
             if not car_found:
                 print("Car not found")
+        # Search type 2 - name
         elif search_type == "2":
             print("Please enter the name of the car:")
             car_name = input("")
@@ -135,13 +166,13 @@ def search():
         elif search_type != "-1":
             print("Invalid command")
 
-
 # Load the cars from data.txt
 saved_cars = load_data("data.txt")
 cars = saved_cars
 
 print("Welcome to the cars inventory system") 
 command = ""
+# Main loop
 while command != "0":
     print("What would you like to do today?")
     print("Add a car? enter 1\nSearch for car? enter 2\nEdit car info? enter 3\nRemove a car? enter 4\nPrint the car list? enter 5\nSave the data to a file? enter 6\nExit? enter 0.")
